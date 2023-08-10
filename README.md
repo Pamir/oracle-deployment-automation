@@ -1,2 +1,2 @@
-# oracle-deployment-automation
+# Oracle Deployment Automation
 Oracle Deployment Automation
