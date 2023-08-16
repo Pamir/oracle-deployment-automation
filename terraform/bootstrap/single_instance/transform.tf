@@ -17,6 +17,38 @@ locals {
         ""
       )
     }
+    vnet = {
+      name = try(
+        coalesce(
+          local.vnet_oracle_name,
+          try(var.infrastructure.vnet.name, "")
+        ),
+        ""
+      )
+      arm_id = try(
+        coalesce(
+          var.vnet_arm_id,
+          try(var.infrastructure.vnet.arm_id, "")
+        ),
+        ""
+      )
+    }
+    subnet = {
+      name = try(
+        coalesce(
+          local.database_subnet_name,
+          try(var.infrastructure.subnet.name, "")
+        ),
+        ""
+      )
+      arm_id = try(
+        coalesce(
+          var.subnet_arm_id,
+          try(var.infrastructure.subnet.arm_id, "")
+        ),
+        ""
+      )
+    }
     tags = try(
       coalesce(
         var.resourcegroup_tags,

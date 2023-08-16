@@ -36,6 +36,11 @@ locals {
     disk_type = var.deployer_disk_type
   }
 
+  vm_oracle_name = "oraclevm"
+
+  vm_oracle_arm_id = try(local.vm_oracle_name.arm_id, "")
+  vm_oracle_exists = length(local.vm_oracle_arm_id) > 0
+
   enable_ultradisk = false
   oracle_sku       = "Standard_D4s_v3"
 

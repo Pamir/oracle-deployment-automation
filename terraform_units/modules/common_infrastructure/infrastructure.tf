@@ -28,6 +28,7 @@ data "azurerm_resource_group" "rg" {
 #                                                                                       #
 #########################################################################################
 resource "azurerm_virtual_network" "vnet_oracle" {
+  count               = local.vnet_oracle_exists ? 0 : 1
   name                = local.vnet_oracle_name
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
@@ -35,6 +36,7 @@ resource "azurerm_virtual_network" "vnet_oracle" {
 }
 
 data "azurerm_virtual_network" "vnet_oracle" {
+  count               = local.vnet_oracle_exists ? 0 : 1
   name                = local.vnet_oracle_name
   resource_group_name = local.rg_name
 
@@ -47,18 +49,18 @@ data "azurerm_virtual_network" "vnet_oracle" {
 #                                                                                       #
 #########################################################################################
 resource "azurerm_subnet" "subnet_oracle" {
-  count                = 1
+  count                = local.subnet_oracle_exists ? 0 : 1
   name                 = local.database_subnet_name
-  resource_group_name  = data.azurerm_virtual_network.vnet_oracle.resource_group_name
-  virtual_network_name = data.azurerm_virtual_network.vnet_oracle.name
+  resource_group_name  = data.azurerm_virtual_network.vnet_oracle[count.index].resource_group_name
+  virtual_network_name = data.azurerm_virtual_network.vnet_oracle[count.index].name
   address_prefixes     = [local.database_subnet_prefix]
 }
 
 data "azurerm_subnet" "subnet_oracle" {
-  count                = 1
+  count                = local.subnet_oracle_exists ? 0 : 1
   name                 = local.database_subnet_name
-  resource_group_name  = data.azurerm_virtual_network.vnet_oracle.resource_group_name
-  virtual_network_name = data.azurerm_virtual_network.vnet_oracle.name
+  resource_group_name  = data.azurerm_virtual_network.vnet_oracle[count.index].resource_group_name
+  virtual_network_name = data.azurerm_virtual_network.vnet_oracle[count.index].name
 
   depends_on = [azurerm_subnet.subnet_oracle]
 }

@@ -46,7 +46,8 @@ resource "azurerm_network_interface" "oracle_db" {
 #                                                                                       #
 #########################################################################################
 resource "azurerm_linux_virtual_machine" "oracle_vm" {
-  name                = "oraclevm1"
+  count               = var.database_server_count
+  name                = "${var.vm_oracle_name}-${count.index}"
   location            = var.resource_group.location
   resource_group_name = var.resource_group.name
 

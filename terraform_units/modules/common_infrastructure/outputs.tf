@@ -28,7 +28,7 @@ output "created_resource_group_subscription_id" {
 #                                                                             #
 ###############################################################################
 output "network_location" {
-  value = data.azurerm_virtual_network.vnet_oracle.location
+  value = data.azurerm_virtual_network.vnet_oracle[0].location
 }
 
 output "db_subnet" {

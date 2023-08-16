@@ -59,3 +59,7 @@ variable "deployer" {
     "disk_type" : "Premium_LRS"
   }
 }
+
+variable "vm_oracle_name" {
+  description = "The name of the Oracle VM"
+}

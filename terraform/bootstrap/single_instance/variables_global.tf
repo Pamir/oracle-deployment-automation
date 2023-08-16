@@ -17,3 +17,13 @@ variable "options" {
   description = "Options for the Oracle deployment"
   default     = {}
 }
+
+variable "vnet_arm_id" {
+  description = "ARM ID of the VNet to be deployed"
+  default     = ""
+}
+
+variable "subnet_arm_id" {
+  description = "ARM ID of the subnet to be deployed"
+  default     = ""
+}
