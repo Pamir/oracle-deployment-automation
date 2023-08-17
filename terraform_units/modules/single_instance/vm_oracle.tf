@@ -35,9 +35,18 @@ resource "azurerm_network_interface" "oracle_db" {
         pub.value.private_ip_address_allocation
       )
 
+      public_ip_address_id = azurerm_public_ip.vm_pip.id
+
       primary = pub.value.primary
     }
   }
+}
+
+resource "azurerm_public_ip" "vm_pip" {
+  name                = "vmpip"
+  location            = var.resource_group.location
+  resource_group_name = var.resource_group.name
+  allocation_method   = "Dynamic"
 }
 
 #########################################################################################
