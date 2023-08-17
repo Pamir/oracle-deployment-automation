@@ -64,3 +64,31 @@ data "azurerm_subnet" "subnet_oracle" {
 
   depends_on = [azurerm_subnet.subnet_oracle]
 }
+
+#########################################################################################
+#                                                                                       #
+#  Network Security Group                                                               #
+#                                                                                       #
+#########################################################################################
+resource "azurerm_network_security_group" "allow_ssh" {
+  name                = "allow_ssh"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "allow_ssh"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "ssh" {
+  subnet_id                 = azurerm_subnet.subnet_oracle[0].id
+  network_security_group_id = azurerm_network_security_group.allow_ssh.id
+}
