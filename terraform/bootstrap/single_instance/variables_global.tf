@@ -10,6 +10,28 @@ variable "database" {
     authentication = {
       type = "key"
     }
+    data_disks = [
+      {
+        count                     = 1
+        caching                   = "ReadOnly"
+        create_option             = "Empty"
+        disk_size_gb              = 1024
+        lun                       = 0
+        managed_disk_type         = "Premium_LRS"
+        storage_account_type      = "Standard_LRS"
+        write_accelerator_enabled = false
+      },
+      {
+        count                     = 1
+        caching                   = "None"
+        create_option             = "Empty"
+        disk_size_gb              = 1024
+        lun                       = 1
+        managed_disk_type         = "Premium_LRS"
+        storage_account_type      = "Standard_LRS"
+        write_accelerator_enabled = false
+      }
+    ]
   }
 }
 

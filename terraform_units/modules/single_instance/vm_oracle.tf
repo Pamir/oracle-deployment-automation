@@ -35,9 +35,18 @@ resource "azurerm_network_interface" "oracle_db" {
         pub.value.private_ip_address_allocation
       )
 
+      public_ip_address_id = azurerm_public_ip.vm_pip.id
+
       primary = pub.value.primary
     }
   }
+}
+
+resource "azurerm_public_ip" "vm_pip" {
+  name                = "vmpip"
+  location            = var.resource_group.location
+  resource_group_name = var.resource_group.name
+  allocation_method   = "Dynamic"
 }
 
 #########################################################################################
@@ -91,4 +100,28 @@ resource "azurerm_linux_virtual_machine" "oracle_vm" {
       computer_name
     ]
   }
+}
+
+#########################################################################################
+#                                                                                       #
+#  Data Disk                                                                            #
+#                                                                                       #
+#########################################################################################
+resource "azurerm_managed_disk" "data_disk" {
+  count                = length(local.data_disks)
+  name                 = "${var.naming}-${count.index}"
+  location             = var.resource_group.location
+  resource_group_name  = var.resource_group.name
+  storage_account_type = var.storage_account_type
+  create_option        = "Empty"
+  disk_size_gb         = 1024
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "data_disk_attachment" {
+  count                     = length(local.data_disks)
+  managed_disk_id           = azurerm_managed_disk.data_disk[count.index].id
+  virtual_machine_id        = azurerm_linux_virtual_machine.oracle_vm[0].id
+  caching                   = local.data_disks[count.index].caching
+  write_accelerator_enabled = local.data_disks[count.index].write_accelerator_enabled
+  lun                       = local.data_disks[count.index].lun
 }
