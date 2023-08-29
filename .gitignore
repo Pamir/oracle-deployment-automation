@@ -34,3 +34,12 @@ override.tf.json
 terraform.rc
 **/.terraform.lock.hcl
 **/.terraform/*
+
+
+#ansible gitignore files
+*.retry
+*.pyc
+*.time
+inventory
+#for oracle
+*.zip 
