@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: true
+  roles:
+  - oracle19c  #oracle software installatio
+  - dbca       # database creation
