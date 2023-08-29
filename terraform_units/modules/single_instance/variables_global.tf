@@ -34,12 +34,12 @@ variable "use_secondary_ips" {
   default     = false
 }
 
-variable "database_vm_db_nic_ips" {
+variable "database_nic_ips" {
   description = "If provided, the database tier virtual machines will be configured using the specified IPs"
   default     = [""]
 }
 
-variable "database_vm_db_nic_secondary_ips" {
+variable "database_nic_secondary_ips" {
   description = "If provided, the database tier virtual machines will be configured using the specified IPs as secondary IPs"
   default     = [""]
 }
@@ -60,15 +60,15 @@ variable "deployer" {
   }
 }
 
-variable "vm_oracle_name" {
+variable "name" {
   description = "The name of the Oracle VM"
 }
 
-variable "storage_account_type" {
+variable "type" {
   description = "The type of the storage account"
   default     = "Premium_LRS"
   validation {
-    condition     = contains(["Standard_LRS", "StandardSSD_ZRS", "Premium_LRS", "PremiumV2_LRS", "Premium_ZRS", "StandardSSD_LRS", "UltraSSD_LRS"], var.storage_account_type)
+    condition     = contains(["Standard_LRS", "StandardSSD_ZRS", "Premium_LRS", "PremiumV2_LRS", "Premium_ZRS", "StandardSSD_LRS", "UltraSSD_LRS"], var.type)
     error_message = "Allowed values are Standard_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS, StandardSSD_LRS, UltraSSD_LRS"
   }
 }

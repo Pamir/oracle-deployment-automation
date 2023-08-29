@@ -14,7 +14,7 @@ locals {
     {
       name                          = "IPConfig1"
       subnet_id                     = var.db_subnet.id
-      nic_ips                       = var.database_vm_db_nic_ips
+      nic_ips                       = var.database_nic_ips
       private_ip_address_allocation = var.database.use_DHCP ? "Dynamic" : "Static"
       offset                        = 0
       primary                       = true
@@ -25,7 +25,7 @@ locals {
     {
       name                          = "IPConfig2"
       subnet_id                     = var.db_subnet.id
-      nic_ips                       = var.database_vm_db_nic_secondary_ips
+      nic_ips                       = var.database_nic_secondary_ips
       private_ip_address_allocation = var.database.use_DHCP ? "Dynamic" : "Static"
       offset                        = var.database_server_count
       primary                       = false
@@ -40,22 +40,22 @@ locals {
     [
       for disk in var.database.data_disks : [
         for i in range(0, disk.count) : {
-          name                      = "${var.vm_oracle_name}-datadisk${i}"
+          name                      = "${var.name}-datadisk${i}"
           caching                   = disk.caching
           create_option             = disk.create_option
           disk_size_gb              = disk.disk_size_gb
           lun                       = disk.lun + i
-          managed_disk_type         = disk.managed_disk_type
-          storage_account_type      = disk.storage_account_type
+          managed_disk_type         = disk.type
+          storage_account_type      = disk.type
           write_accelerator_enabled = disk.write_accelerator_enabled
         }
       ]
     ]
   )
 
-  vm_oracle_name = "oraclevm"
+  name = "oraclevm"
 
-  vm_oracle_arm_id = try(local.vm_oracle_name.arm_id, "")
+  vm_oracle_arm_id = try(local.name.arm_id, "")
   vm_oracle_exists = length(local.vm_oracle_arm_id) > 0
 
   enable_ultradisk = false
