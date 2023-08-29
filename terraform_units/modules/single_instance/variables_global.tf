@@ -2,6 +2,10 @@ variable "database" {}
 variable "infrastructure" {}
 variable "options" {}
 
+variable "subscription_id" {
+  description = "The subscription ID where the policy will be deployed"
+}
+
 variable "resource_group" {
   description = "Details of the resource group"
   default     = {}

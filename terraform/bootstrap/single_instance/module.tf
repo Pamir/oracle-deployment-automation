@@ -8,13 +8,14 @@ module "common_infrastructure" {
 module "oracle_vm" {
   source = "../../../terraform_units/modules/single_instance"
 
-  resource_group = module.common_infrastructure.resource_group
-  naming         = "ora"
-  db_subnet      = module.common_infrastructure.db_subnet
-  name           = "oraclevm"
-  sid_username   = "oracle"
-  public_key     = var.ssh_key
-  infrastructure = var.infrastructure
-  database       = var.database
-  options        = var.options
+  subscription_id = module.common_infrastructure.current_subscription.subscription_id
+  resource_group  = module.common_infrastructure.resource_group
+  naming          = "ora"
+  db_subnet       = module.common_infrastructure.db_subnet
+  vm_oracle_name  = "oraclevm"
+  sid_username    = "oracle"
+  public_key      = var.ssh_key
+  infrastructure  = var.infrastructure
+  database        = var.database
+  options         = var.options
 }
