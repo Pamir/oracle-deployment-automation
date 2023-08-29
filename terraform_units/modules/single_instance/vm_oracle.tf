@@ -125,3 +125,31 @@ resource "azurerm_virtual_machine_data_disk_attachment" "data_disk_attachment" {
   write_accelerator_enabled = local.data_disks[count.index].write_accelerator_enabled
   lun                       = local.data_disks[count.index].lun
 }
+
+#########################################################################################
+#                                                                                       #
+#  JIT Access Policy                                                                    #
+#                                                                                       #
+#########################################################################################
+resource "azapi_resource" "jit_ssh_policy" {
+  name                      = "JIT-SSH"
+  parent_id                 = "${var.resource_group.id}/providers/Microsoft.Security/locations/${var.resource_group.location}"
+  type                      = "Microsoft.Security/locations/jitNetworkAccessPolicies@2020-01-01"
+  schema_validation_enabled = false
+  body = jsonencode({
+    "kind" : "Basic"
+    "properties" : {
+      "virtualMachines" : [{
+        "id" : "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group.name}/providers/Microsoft.Compute/virtualMachines/${azurerm_linux_virtual_machine.oracle_vm[0].name}",
+        "ports" : [
+          {
+            "number" : 22,
+            "protocol" : "TCP",
+            "allowedSourceAddressPrefix" : "10.0.0.0/8",
+            "maxRequestAccessDuration" : "PT3H"
+          }
+        ]
+      }]
+    }
+  })
+}
