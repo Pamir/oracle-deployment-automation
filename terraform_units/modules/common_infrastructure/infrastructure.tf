@@ -33,6 +33,8 @@ resource "azurerm_virtual_network" "vnet_oracle" {
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
   address_space       = [local.vnet_oracle_addr]
+
+  tags = var.infrastructure.tags
 }
 
 data "azurerm_virtual_network" "vnet_oracle" {
@@ -86,6 +88,8 @@ resource "azurerm_network_security_group" "allow_ssh" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
+  tags = var.infrastructure.tags
 }
 
 resource "azurerm_subnet_network_security_group_association" "ssh" {
