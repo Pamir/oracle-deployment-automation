@@ -5,50 +5,51 @@
     update_cache: yes
   vars:
     packages:
-    - bc
-    - binutils
-    - compat-libcap1
-    - compat-libstdc++-33*x86_64
-    - compat-libstdc++-33
-    - elfutils-libelf
-    - elfutils-libelf-devel
-    - fontconfig-devel
-    - glibc
-    - glibc*x86_64
-    - glibc-devel
-    - glibc-devel*x86_64
-    - ksh
-    - libaio
-    - libaio*x86_64
-    - libaio-devel
-    - libaio-devel*x86_64
-    - libX11
-    - libX11*x86_64
-    - libXau
-    - libXau*x86_64
-    - libXi
-    - libXi*x86_64
-    - libXtst
-    - libXtst*x86_64
-    - libXrender
-    - libXrender*x86_64
-    - libXrender-devel
-    - libXrender-devel*x86_64
-    - libgcc
-    - libgcc*x86_64
-    - libstdc++
-    - libstdc++*x86_64
-    - libstdc++-devel
-    - libstdc++-devel*x86_64
-    - libxcb
-    - libxcb*x86_64
-    - make
-    - smartmontools
-    - sysstat
-    #- unixODBC
-    #- unixODBC*x86_64
-   # - unixODBC-devel
-   # - unixODBC-devel*x86_64
+    - oracle-database-preinstall-19c
+    #- bc
+    #- binutils
+    #- compat-libcap1
+    #- compat-libstdc++-33*x86_64
+    #- compat-libstdc++-33
+    #- elfutils-libelf
+    #- elfutils-libelf-devel
+    #- fontconfig-devel
+    #- glibc
+    #- glibc*x86_64
+    #- glibc-devel
+    #- glibc-devel*x86_64
+    #- ksh
+    #- libaio
+    #- libaio*x86_64
+    #- libaio-devel
+    #- libaio-devel*x86_64
+    #- libX11
+    #- libX11*x86_64
+    #- libXau
+    #- libXau*x86_64
+    #- libXi
+    #- libXi*x86_64
+    #- libXtst
+    #- libXtst*x86_64
+    #- libXrender
+    #- libXrender*x86_64
+    #- libXrender-devel
+    #- libXrender-devel*x86_64
+    #- libgcc
+    #- libgcc*x86_64
+    #- libstdc++
+    #- libstdc++*x86_64
+    #- libstdc++-devel
+    #- libstdc++-devel*x86_64
+    #- libxcb
+    #- libxcb*x86_64
+    #- make
+    #- smartmontools
+    #- sysstat
+    ##- unixODBC
+    ##- unixODBC*x86_64
+   ## - unixODBC-devel
+   ## - unixODBC-devel*x86_64
     - unzip
 
 - name: selinux dependencies
