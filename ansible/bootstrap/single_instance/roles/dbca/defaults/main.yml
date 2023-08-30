@@ -1,0 +1,3 @@
+---
+oracle_db_home: /u01/app/oracle/product/19.3.0/dbhome_1
+oracle_user: oracle
