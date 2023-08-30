@@ -19,7 +19,7 @@ variable "resourcegroup_tags" {
   default     = {}
 }
 
-variable "database_vm_db_nic_ips" {
+variable "database_db_nic_ips" {
   description = "If provided, the database tier virtual machines will be configured using the specified IPs"
   default     = [""]
 }

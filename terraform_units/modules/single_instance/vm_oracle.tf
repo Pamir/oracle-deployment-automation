@@ -40,6 +40,8 @@ resource "azurerm_network_interface" "oracle_db" {
       primary = pub.value.primary
     }
   }
+
+  tags = local.tags
 }
 
 resource "azurerm_public_ip" "vm_pip" {
@@ -47,6 +49,8 @@ resource "azurerm_public_ip" "vm_pip" {
   location            = var.resource_group.location
   resource_group_name = var.resource_group.name
   allocation_method   = "Dynamic"
+
+  tags = local.tags
 }
 
 #########################################################################################
@@ -56,7 +60,7 @@ resource "azurerm_public_ip" "vm_pip" {
 #########################################################################################
 resource "azurerm_linux_virtual_machine" "oracle_vm" {
   count               = var.database_server_count
-  name                = "${var.vm_oracle_name}-${count.index}"
+  name                = "${var.name}-${count.index}"
   location            = var.resource_group.location
   resource_group_name = var.resource_group.name
 
@@ -112,9 +116,11 @@ resource "azurerm_managed_disk" "data_disk" {
   name                 = "${var.naming}-${count.index}"
   location             = var.resource_group.location
   resource_group_name  = var.resource_group.name
-  storage_account_type = var.storage_account_type
+  storage_account_type = var.type
   create_option        = "Empty"
   disk_size_gb         = 1024
+
+  tags = local.tags
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "data_disk_attachment" {
