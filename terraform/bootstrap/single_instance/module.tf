@@ -12,7 +12,7 @@ module "oracle_vm" {
   resource_group  = module.common_infrastructure.resource_group
   naming          = "ora"
   db_subnet       = module.common_infrastructure.db_subnet
-  vm_oracle_name  = "oraclevm"
+  vm_name         = "oraclevm"
   sid_username    = "oracle"
   public_key      = var.ssh_key
   infrastructure  = var.infrastructure

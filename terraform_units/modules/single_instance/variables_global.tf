@@ -64,15 +64,15 @@ variable "deployer" {
   }
 }
 
-variable "name" {
+variable "vm_name" {
   description = "The name of the Oracle VM"
 }
 
-variable "type" {
+variable "disk_type" {
   description = "The type of the storage account"
   default     = "Premium_LRS"
   validation {
-    condition     = contains(["Standard_LRS", "StandardSSD_ZRS", "Premium_LRS", "PremiumV2_LRS", "Premium_ZRS", "StandardSSD_LRS", "UltraSSD_LRS"], var.type)
+    condition     = contains(["Standard_LRS", "StandardSSD_ZRS", "Premium_LRS", "PremiumV2_LRS", "Premium_ZRS", "StandardSSD_LRS", "UltraSSD_LRS"], var.disk_type)
     error_message = "Allowed values are Standard_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS, StandardSSD_LRS, UltraSSD_LRS"
   }
 }
