@@ -5,25 +5,16 @@ locals {
     try(split("/", var.infrastructure.resource_group.arm_id))[4]) : (
     length(var.infrastructure.resource_group.name) > 0 ? (
       var.infrastructure.resource_group.name) : (
-      format("%s-%s-%s-%s",
+      format("%s-%s-%s-%s-%s",
         "rg",
         local.prefix,
-        "test",
-        var.infrastructure.region
+        "demo",
+        var.infrastructure.region,
+        "001"
       )
     )
   )
 
-  vnet_oracle_name       = "vnet1"
-  database_subnet_name   = "subnet1"
-  vnet_oracle_addr       = "10.0.0.0/16"
-  database_subnet_prefix = "10.0.0.0/24"
-
-  vnet_oracle_arm_id   = try(local.vnet_oracle_name.arm_id, "")
-  vnet_oracle_exists   = length(local.vnet_oracle_arm_id) > 0
-  subnet_oracle_arm_id = try(local.database_subnet_name.arm_id, "")
-  subnet_oracle_exists = length(local.subnet_oracle_arm_id) > 0
-
   // Resource group
-  prefix = "prefixdummy"
+  prefix = "oracle"
 }
