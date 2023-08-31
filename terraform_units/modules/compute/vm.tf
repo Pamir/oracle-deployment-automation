@@ -50,3 +50,34 @@ resource "azurerm_linux_virtual_machine" "oracle_vm" {
     ]
   }
 }
+
+#########################################################################################
+#                                                                                       #
+#  JIT Access Policy                                                                    #
+#                                                                                       #
+#########################################################################################
+resource "azapi_resource" "jit_ssh_policy" {
+  count                     = var.database_server_count
+  name                      = "JIT-SSH-Policy"
+  parent_id                 = "${var.resource_group.id}/providers/Microsoft.Security/locations/${var.resource_group.location}"
+  type                      = "Microsoft.Security/locations/jitNetworkAccessPolicies@2020-01-01"
+  schema_validation_enabled = false
+  body = jsonencode({
+    "kind" : "Basic"
+    "properties" : {
+      "virtualMachines" : [{
+        "id" : "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group.name}/providers/Microsoft.Compute/virtualMachines/${var.vm_name}-${count.index}",
+        "ports" : [
+          {
+            "number" : "22",
+            "protocol" : "TCP",
+            "allowedSourceAddressPrefix" : "${var.client_ip_range}",
+            "maxRequestAccessDuration" : "PT3H"
+          }
+        ]
+      }]
+    }
+  })
+
+  depends_on = [azurerm_linux_virtual_machine.oracle_vm]
+}

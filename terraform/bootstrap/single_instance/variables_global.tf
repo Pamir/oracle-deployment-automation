@@ -47,3 +47,7 @@ variable "subnet_arm_id" {
   description = "ARM ID of the subnet to be deployed"
   default     = ""
 }
+
+variable "client_ip_range" {
+  description = "Client IP address range"
+}

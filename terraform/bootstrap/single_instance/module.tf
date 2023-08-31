@@ -7,11 +7,13 @@ module "common_infrastructure" {
 module "vm" {
   source = "../../../terraform_units/modules/compute"
 
-  resource_group = module.common_infrastructure.resource_group
-  vm_name        = "oraclevm"
-  public_key     = var.ssh_key
-  sid_username   = "oracle"
-  nic_id         = module.network.nics_oracledb[0].id
+  subscription_id = module.common_infrastructure.current_subscription.subscription_id
+  resource_group  = module.common_infrastructure.resource_group
+  vm_name         = "vm"
+  public_key      = var.ssh_key
+  sid_username    = "oracle"
+  nic_id          = module.network.nics_oracledb[0].id
+  client_ip_range = var.client_ip_range
 }
 
 module "network" {
