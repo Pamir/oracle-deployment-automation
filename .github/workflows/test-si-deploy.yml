@@ -1,0 +1,37 @@
+
+name: Deploy Single Instance Oracle VM
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+      id-token: write
+      contents: read
+
+env:
+  Location: "norwayeast"
+  client-id: "b5d19df2-caf8-4379-b287-4d09e490fa31"
+  tenant-id: "449fbe1d-9c99-4509-9014-4fd5cf25b014"
+  subscription-id: "5006fcc2-d832-4bc5-a015-9be4d1d6d74b"
+
+  
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+          client-id: ${{ env.AZURE_CLIENT_ID }}
+          tenant-id: ${{ env.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
+
+
+     
