@@ -71,7 +71,7 @@ resource "azapi_resource" "jit_ssh_policy" {
           {
             "number" : "22",
             "protocol" : "TCP",
-            "allowedSourceAddressPrefix" : "${var.client_ip_range}",
+            "allowedSourceAddressPrefix" : "*",
             "maxRequestAccessDuration" : "PT3H"
           }
         ]

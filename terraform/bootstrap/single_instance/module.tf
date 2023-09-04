@@ -13,7 +13,6 @@ module "vm" {
   public_key      = var.ssh_key
   sid_username    = "oracle"
   nic_id          = module.network.nics_oracledb[0].id
-  client_ip_range = var.client_ip_range
 }
 
 module "network" {

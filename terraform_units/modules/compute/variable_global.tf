@@ -45,10 +45,6 @@ variable "nic_id" {
   description = "value of the nic id"
 }
 
-variable "client_ip_range" {
-  description = "Client IP address range"
-}
-
 variable "subscription_id" {
   description = "Subscription ID"
 }
