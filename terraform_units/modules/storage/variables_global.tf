@@ -1,15 +1,28 @@
-variable "infrastructure" {
-  description = "Details of the Azure infrastructure to deploy the SAP landscape into"
+variable "naming" {
+  description = "Defines the names for the resources"
+}
+
+variable "vm" {
+  description = "Virtual machine name"
+}
+
+variable "resource_group" {
+  description = "Details of the resource group"
   default     = {}
+}
+
+variable "disk_type" {
+  description = "The type of the storage account"
+  default     = "Premium_LRS"
+  validation {
+    condition     = contains(["Standard_LRS", "StandardSSD_ZRS", "Premium_LRS", "PremiumV2_LRS", "Premium_ZRS", "StandardSSD_LRS", "UltraSSD_LRS"], var.disk_type)
+    error_message = "Allowed values are Standard_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS, StandardSSD_LRS, UltraSSD_LRS"
+  }
 }
 
 variable "database" {
   description = "Details of the database node"
   default = {
-    use_DHCP = true
-    authentication = {
-      type = "key"
-    }
     data_disks = [
       {
         count                     = 1
@@ -31,19 +44,4 @@ variable "database" {
       }
     ]
   }
-}
-
-variable "options" {
-  description = "Options for the Oracle deployment"
-  default     = {}
-}
-
-variable "vnet_arm_id" {
-  description = "ARM ID of the VNet to be deployed"
-  default     = ""
-}
-
-variable "subnet_arm_id" {
-  description = "ARM ID of the subnet to be deployed"
-  default     = ""
 }
