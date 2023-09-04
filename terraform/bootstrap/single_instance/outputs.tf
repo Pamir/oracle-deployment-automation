@@ -28,9 +28,9 @@ output "created_resource_group_subscription_id" {
 #                                                                             #
 ###############################################################################
 output "network_location" {
-  value = module.common_infrastructure.network_location
+  value = module.network.network_location
 }
 
 output "db_subnet" {
-  value = module.common_infrastructure.db_subnet
+  value = module.network.db_subnet
 }
