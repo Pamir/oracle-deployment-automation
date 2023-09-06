@@ -30,3 +30,13 @@ output "created_resource_group_subscription_id" {
   description = "Created resource group' subscription ID"
   value       = data.azurerm_resource_group.rg.id
 }
+
+output "is_diagnostic_settings_enabled" {
+  description = "Whether diagnostic settings are enabled"
+  value       = var.is_diagnostic_settings_enabled
+}
+
+output "target_storage_account_id" {
+  description = "Storage account ID used for diagnostics"
+  value       = data.azurerm_storage_account.diagnostic.id
+}

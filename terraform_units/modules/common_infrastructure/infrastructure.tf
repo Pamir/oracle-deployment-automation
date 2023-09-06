@@ -28,3 +28,31 @@ data "azurerm_resource_group" "rg" {
 
   depends_on = [azurerm_resource_group.rg]
 }
+
+#########################################################################################
+#                                                                                       #
+#  Diagnostic Settings                                                                  #
+#                                                                                       #
+#########################################################################################
+resource "azurerm_storage_account" "diagnostic" {
+  count               = var.is_diagnostic_settings_enabled ? 1 : 0
+  name                = "${local.prefix}diag${random_string.suffix.result}"
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+data "azurerm_storage_account" "diagnostic" {
+  name                = "${local.prefix}diag${random_string.suffix.result}"
+  resource_group_name = data.azurerm_resource_group.rg.name
+
+  depends_on = [azurerm_storage_account.diagnostic]
+}
+
+resource "random_string" "suffix" {
+  length  = 14
+  special = false
+  upper   = false
+}
