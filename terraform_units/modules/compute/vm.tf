@@ -40,6 +40,11 @@ resource "azurerm_linux_virtual_machine" "oracle_vm" {
     ultra_ssd_enabled = local.enable_ultradisk
   }
 
+  identity {
+    type         = var.aad_system_assigned_identity ? "SystemAssigned, UserAssigned" : "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.deployer.id]
+  }
+
   tags = local.tags
 
   lifecycle {

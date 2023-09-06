@@ -48,3 +48,18 @@ variable "nic_id" {
 variable "subscription_id" {
   description = "Subscription ID"
 }
+
+variable "assign_subscription_permissions" {
+  description = "Assign permissions on the subscription"
+  type        = bool
+}
+
+variable "aad_system_assigned_identity" {
+  description = "AAD system assigned identity"
+  type        = bool
+}
+
+variable "skip_service_principal_aad_check" {
+  description = "If the principal_id is a newly provisioned `Service Principal` set this value to true to skip the Azure Active Directory check which may fail due to replication lag."
+  default     = true
+}

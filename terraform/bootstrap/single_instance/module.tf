@@ -13,6 +13,9 @@ module "vm" {
   public_key      = var.ssh_key
   sid_username    = "oracle"
   nic_id          = module.network.nics_oracledb[0].id
+
+  aad_system_assigned_identity    = false
+  assign_subscription_permissions = true
 }
 
 module "network" {
