@@ -45,7 +45,8 @@ resource "azurerm_storage_account" "diagnostic" {
 }
 
 data "azurerm_storage_account" "diagnostic" {
-  name                = "${local.prefix}diag${random_string.suffix.result}"
+  count               = var.is_diagnostic_settings_enabled ? 1 : 0
+  name                = azurerm_storage_account.diagnostic[count.index].name
   resource_group_name = data.azurerm_resource_group.rg.name
 
   depends_on = [azurerm_storage_account.diagnostic]

@@ -38,5 +38,5 @@ output "is_diagnostic_settings_enabled" {
 
 output "target_storage_account_id" {
   description = "Storage account ID used for diagnostics"
-  value       = data.azurerm_storage_account.diagnostic.id
+  value       = var.is_diagnostic_settings_enabled ? data.azurerm_storage_account.diagnostic[0].id : ""
 }
