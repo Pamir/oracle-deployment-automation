@@ -67,3 +67,16 @@ Finally, you can connect to the virtual machine with ssh private key. While depl
 ```
 $ ssh oracle@<PUBLIC_IP_ADDRESS>
 ```
+
+### How to enable diagnostic settings
+
+To enable diagnostic settings, you have to set `is_diagnostic_settings_enabled` **true** in **common_infrastructure** module.
+
+```
+module "common_infrastructure" {
+  source = "../../../terraform_units/modules/common_infrastructure"
+
+  infrastructure                 = local.infrastructure
+  is_diagnostic_settings_enabled = true  // ← This one
+}
+```
