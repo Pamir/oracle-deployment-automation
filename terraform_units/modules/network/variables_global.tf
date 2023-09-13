@@ -32,3 +32,14 @@ variable "use_secondary_ips" {
   description = "Defines if secondary IPs are used for the SAP Systems virtual machines"
   default     = false
 }
+
+variable "storage_account_id" {
+  description = "Storage account ID used for diagnostics"
+  type        = string
+  default     = ""
+}
+
+variable "is_diagnostic_settings_enabled" {
+  description = "Whether diagnostic settings are enabled"
+  default     = false
+}

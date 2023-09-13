@@ -1,7 +1,8 @@
 module "common_infrastructure" {
   source = "../../../terraform_units/modules/common_infrastructure"
 
-  infrastructure = local.infrastructure
+  infrastructure                 = local.infrastructure
+  is_diagnostic_settings_enabled = true
 }
 
 module "vm" {
@@ -16,12 +17,17 @@ module "vm" {
 
   aad_system_assigned_identity    = false
   assign_subscription_permissions = true
+
+  is_diagnostic_settings_enabled = module.common_infrastructure.is_diagnostic_settings_enabled
+  storage_account_id             = module.common_infrastructure.target_storage_account_id
 }
 
 module "network" {
   source = "../../../terraform_units/modules/network"
 
-  resource_group = module.common_infrastructure.resource_group
+  resource_group                 = module.common_infrastructure.resource_group
+  is_diagnostic_settings_enabled = module.common_infrastructure.is_diagnostic_settings_enabled
+  storage_account_id             = module.common_infrastructure.target_storage_account_id
 }
 
 module "storage" {

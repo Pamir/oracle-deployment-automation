@@ -63,3 +63,14 @@ variable "skip_service_principal_aad_check" {
   description = "If the principal_id is a newly provisioned `Service Principal` set this value to true to skip the Azure Active Directory check which may fail due to replication lag."
   default     = true
 }
+
+variable "storage_account_id" {
+  description = "Storage account ID used for diagnostics"
+  type        = string
+  default     = ""
+}
+
+variable "is_diagnostic_settings_enabled" {
+  description = "Whether diagnostic settings are enabled"
+  default     = false
+}
