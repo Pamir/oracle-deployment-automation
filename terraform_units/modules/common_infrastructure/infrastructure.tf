@@ -57,3 +57,37 @@ resource "random_string" "suffix" {
   special = false
   upper   = false
 }
+
+data "azurerm_storage_account_sas" "diagnostic" {
+  count             = var.is_diagnostic_settings_enabled ? 1 : 0
+  connection_string = azurerm_storage_account.diagnostic[0].primary_connection_string
+
+  resource_types {
+    service   = false
+    container = true
+    object    = true
+  }
+
+  services {
+    blob  = true
+    queue = false
+    table = true
+    file  = false
+  }
+
+  start  = timestamp()
+  expiry = timeadd(timestamp(), "8766h")
+
+  permissions {
+    read    = false
+    write   = true
+    delete  = false
+    list    = true
+    add     = true
+    create  = true
+    update  = true
+    process = false
+    tag     = false
+    filter  = false
+  }
+}

@@ -70,6 +70,12 @@ variable "storage_account_id" {
   default     = ""
 }
 
+variable "storage_account_sas_token" {
+  description = "Storage account SAS token used for diagnostics"
+  type        = string
+  default     = ""
+}
+
 variable "is_diagnostic_settings_enabled" {
   description = "Whether diagnostic settings are enabled"
   default     = false

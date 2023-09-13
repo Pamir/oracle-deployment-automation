@@ -40,3 +40,8 @@ output "target_storage_account_id" {
   description = "Storage account ID used for diagnostics"
   value       = var.is_diagnostic_settings_enabled ? data.azurerm_storage_account.diagnostic[0].id : ""
 }
+
+output "target_storage_account_sas" {
+  description = "Storage account SAS used for diagnostics"
+  value       = var.is_diagnostic_settings_enabled ? data.azurerm_storage_account_sas.diagnostic[0].sas : ""
+}

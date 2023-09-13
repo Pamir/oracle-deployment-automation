@@ -20,6 +20,7 @@ module "vm" {
 
   is_diagnostic_settings_enabled = module.common_infrastructure.is_diagnostic_settings_enabled
   storage_account_id             = module.common_infrastructure.target_storage_account_id
+  storage_account_sas_token      = module.common_infrastructure.target_storage_account_sas
 }
 
 module "network" {
