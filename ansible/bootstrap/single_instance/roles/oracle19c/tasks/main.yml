@@ -208,12 +208,20 @@
     group: "{{ oracle_group }}"
     owner: "{{ oracle_user }}"
 
+- name: create $ORACLE_HOME/patch directory
+  file:
+    mode: 0755
+    path: "{{ oracle_db_home }}/patch"
+    state: directory
+    group: "{{ oracle_group }}"
+    owner: "{{ oracle_user }}"
+
 - block:
   - name: copy response file for silent install
     template:
       src: db_install.rsp.j2
       dest: /home/{{ oracle_user }}/db_install.rsp
-
+  
   #- name: Copy oracle.zip file
   #  ansible.builtin.copy:
   #    src: LINUX.X64_193000_db_home.zip
@@ -221,18 +229,29 @@
   #    owner: oracle
   #    group: oinstall
   #    mode: '0644'
-  - name: Download oracle linux zip file
+  - name: Download Oracle Linux Zip File
     ansible.builtin.get_url:
-      url: https://oraclebinarysa.blob.core.windows.net/oracle/LINUX.X64_193000_db_home.zip?sp=r&st=2023-08-29T10:15:44Z&se=2024-06-02T18:15:44Z&spr=https&sv=2022-11-02&sr=b&sig=nexbA7sIezEcKBWB6eU%2B4rBUl1qw4%2Bh7PqTzvAIkjZ8%3D
+      url: https://oraclebinarysa.blob.core.windows.net/oracle/LINUX.X64_193000_db_home.zip?sp=r&st=2023-09-13T00:14:00Z&se=2025-07-12T08:14:00Z&spr=https&sv=2022-11-02&sr=b&sig=q6BVLxDZWn%2FkQsGTJ6yXjrejJSCZ00t4gO1tc4tIL3o%3D
       dest: /home/{{ oracle_user }}/LINUX.X64_193000_db_home.zip
+
+  - name: Download Oracle Latest Patch
+    ansible.builtin.get_url:
+      url: https://oraclebinarysa.blob.core.windows.net/oracle/p35319490_190000_Linux-x86-64.zip?sp=r&st=2023-09-13T00:12:57Z&se=2025-02-06T09:12:57Z&spr=https&sv=2022-11-02&sr=b&sig=AlHJXCspMt2ajivjqiXiSzv40D%2B1SIPuSVyrJA8zjGI%3D
+      dest: /home/{{ oracle_user }}/LINUX.X64_ltsp.zip
 
   - name: extract the installation media to $ORACLE_HOME
     unarchive:
       src: /home/oracle/LINUX.X64_193000_db_home.zip
       dest: "{{ oracle_db_home }}"
       remote_src: yes
-  - name: runInstaller
-    shell: echo "{{ oracle_pass_raw }}" | ./runInstaller -responseFile /home/{{ oracle_user }}/db_install.rsp -silent
+  - name: extract the oracle patch media to $ORACLE_HOME/patch
+    unarchive:
+      src: /home/{{ oracle_user }}/LINUX.X64_ltsp.zip
+      dest: "{{ oracle_db_home }}/patch"
+      remote_src: yes
+
+  - name: runInstaller      
+    shell: echo "{{ oracle_pass_raw }}" | ./runInstaller -responseFile /home/{{ oracle_user }}/db_install.rsp -silent -applyRU {{ oracle_db_home }}/patch/{{ oracle_patch_number }}
     ignore_errors: yes
     args:
       chdir: "{{ oracle_db_home }}"

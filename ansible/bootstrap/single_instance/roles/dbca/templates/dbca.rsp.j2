@@ -29,7 +29,7 @@ responseFileVersion=/oracle/assistants/rspfmt_dbca_response_schema_v19.0.0
 # Default value : None
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
-gdbName=orcl19c
+gdbName={{ gdbName }}
 
 #-----------------------------------------------------------------------------
 # Name          : sid
@@ -39,7 +39,7 @@ gdbName=orcl19c
 # Default value : <db_name> specified in GDBNAME
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-sid=
+sid= {{ sid }}
 
 #-----------------------------------------------------------------------------
 # Name          : databaseConfigType
@@ -49,7 +49,7 @@ sid=
 # Default value : SI
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-databaseConfigType=
+databaseConfigType={{ databaseConfigType }}
 
 #-----------------------------------------------------------------------------
 # Name          : RACOneNodeServiceName
@@ -60,7 +60,7 @@ databaseConfigType=
 # Default value : None
 # Mandatory     : No [required in case DATABASECONFTYPE is set to RACONENODE ]
 #-----------------------------------------------------------------------------
-RACOneNodeServiceName=
+RACOneNodeServiceName= {{ RACOneNodeServiceName }}
 
 #-----------------------------------------------------------------------------
 # Name          : policyManaged
@@ -71,7 +71,7 @@ RACOneNodeServiceName=
 # Default value : FALSE
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-policyManaged=
+policyManaged={{ policyManaged }}
 
 
 #-----------------------------------------------------------------------------
@@ -85,7 +85,7 @@ policyManaged=
 # Default value : FALSE
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-createServerPool=
+createServerPool= {{ createServerPool }}
 
 #-----------------------------------------------------------------------------
 # Name          : serverPoolName
@@ -99,7 +99,7 @@ createServerPool=
 # Default value : None
 # Mandatory     : No [required in case of RAC service centric database]
 #-----------------------------------------------------------------------------
-serverPoolName=
+serverPoolName= {{ serverPoolName }}
 
 #-----------------------------------------------------------------------------
 # Name          : cardinality
@@ -110,7 +110,7 @@ serverPoolName=
 # Default value : Number of qualified nodes on cluster
 # Mandatory     : No [Required when a new serverpool need to be created]
 #-----------------------------------------------------------------------------
-cardinality=
+cardinality= {{ cardinality }}
 
 #-----------------------------------------------------------------------------
 # Name          : force
@@ -124,7 +124,7 @@ cardinality=
 # Default value : FALSE
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-force=
+force= {{ force }}
 
 #-----------------------------------------------------------------------------
 # Name          : pqPoolName
@@ -138,7 +138,7 @@ force=
 # Default value : None
 # Mandatory     : No [required in case of RAC service centric database]
 #-----------------------------------------------------------------------------
-pqPoolName=
+pqPoolName={{ pqPoolName }}
 
 #-----------------------------------------------------------------------------
 # Name          : pqCardinality
@@ -149,7 +149,7 @@ pqPoolName=
 # Default value : Number of qualified nodes on cluster
 # Mandatory     : No [Required when a new serverpool need to be created]
 #-----------------------------------------------------------------------------
-pqCardinality=
+pqCardinality={{ pqCardinality }}
 
 #-----------------------------------------------------------------------------
 # Name          : createAsContainerDatabase 
@@ -159,7 +159,7 @@ pqCardinality=
 # Default value : false
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-createAsContainerDatabase=
+createAsContainerDatabase={{ createAsContainerDatabase }}
 
 #-----------------------------------------------------------------------------
 # Name          : numberOfPDBs
@@ -169,7 +169,7 @@ createAsContainerDatabase=
 # Default value : 0
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-numberOfPDBs=
+numberOfPDBs={{ numberOfPDBs }}
 
 #-----------------------------------------------------------------------------
 # Name          : pdbName 
@@ -179,7 +179,7 @@ numberOfPDBs=
 # Default value : None
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-pdbName=
+pdbName={{ pdbName }}
 
 #-----------------------------------------------------------------------------
 # Name          : useLocalUndoForPDBs 
@@ -189,7 +189,7 @@ pdbName=
 # Default value : TRUE
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-useLocalUndoForPDBs=
+useLocalUndoForPDBs={{ useLocalUndoForPDBs }}
 
 #-----------------------------------------------------------------------------
 # Name          : pdbAdminPassword
@@ -200,7 +200,7 @@ useLocalUndoForPDBs=
 # Mandatory     : No
 #-----------------------------------------------------------------------------
 
-pdbAdminPassword=
+pdbAdminPassword={{ pdbAdminPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : nodelist
@@ -210,7 +210,7 @@ pdbAdminPassword=
 # Default value : None
 # Mandatory     : No (Yes for RAC database-centric database )
 #-----------------------------------------------------------------------------
-nodelist=
+nodelist={{ nodelist }}
 
 #-----------------------------------------------------------------------------
 # Name          : templateName
@@ -220,7 +220,7 @@ nodelist=
 # Default value : None
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
-templateName=General_Purpose.dbc
+templateName={{templateName}}
 
 #-----------------------------------------------------------------------------
 # Name          : sysPassword
@@ -230,7 +230,7 @@ templateName=General_Purpose.dbc
 # Default value : None
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
-sysPassword=oracle123
+sysPassword={{ sysPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : systemPassword
@@ -240,7 +240,7 @@ sysPassword=oracle123
 # Default value : None
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
-systemPassword=oracle123
+systemPassword={{ systemPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : oracleHomeUserPassword
@@ -249,7 +249,7 @@ systemPassword=oracle123
 # Default value : None
 # Mandatory     : If Oracle home is installed with windows service user
 #-----------------------------------------------------------------------------
-oracleHomeUserPassword=
+oracleHomeUserPassword={{ oracleHomeUserPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : emConfiguration
@@ -259,7 +259,7 @@ oracleHomeUserPassword=
 # Default value : NONE
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-emConfiguration=DBEXPRESS
+emConfiguration={{ emConfiguration }}
 
 #-----------------------------------------------------------------------------
 # Name          : emExpressPort
@@ -270,7 +270,7 @@ emConfiguration=DBEXPRESS
 # Mandatory     : No, will be picked up from DBEXPRESS_HTTPS_PORT env variable
 #                 or auto generates a free port between 5500 and 5599
 #-----------------------------------------------------------------------------
-emExpressPort=5500
+emExpressPort={{ emExpressPort }}
 
 #-----------------------------------------------------------------------------
 # Name          : runCVUChecks
@@ -281,7 +281,7 @@ emExpressPort=5500
 # Default value : FALSE
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-runCVUChecks=
+runCVUChecks={{ runCVUChecks }}
 
 #-----------------------------------------------------------------------------
 # Name          : dbsnmpPassword
@@ -292,7 +292,7 @@ runCVUChecks=
 # Mandatory     : Yes, if emConfiguration is specified or
 #                 the value of runCVUChecks is TRUE
 #-----------------------------------------------------------------------------
-dbsnmpPassword=oracle123
+dbsnmpPassword={{ dbsnmpPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : omsHost
@@ -301,7 +301,7 @@ dbsnmpPassword=oracle123
 # Default value : None
 # Mandatory     : Yes, if CENTRAL is specified for emConfiguration
 #-----------------------------------------------------------------------------
-omsHost=
+omsHost={{ omsHost }}
 
 #-----------------------------------------------------------------------------
 # Name          : omsPort
@@ -310,7 +310,7 @@ omsHost=
 # Default value : None
 # Mandatory     : Yes, if CENTRAL is specified for emConfiguration
 #-----------------------------------------------------------------------------
-omsPort=
+omsPort={{ omsPort }}
 
 #-----------------------------------------------------------------------------
 # Name          : emUser
@@ -319,7 +319,7 @@ omsPort=
 # Default value : None
 # Mandatory     : Yes, if CENTRAL is specified for emConfiguration
 #-----------------------------------------------------------------------------
-emUser=
+emUser={{ emUser }}
 
 #-----------------------------------------------------------------------------
 # Name          : emPassword
@@ -328,7 +328,7 @@ emUser=
 # Default value : None
 # Mandatory     : Yes, if CENTRAL is specified for emConfiguration
 #-----------------------------------------------------------------------------
-emPassword=
+emPassword={{ emPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : dvConfiguration
@@ -338,7 +338,7 @@ emPassword=
 # Default value : False
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-dvConfiguration=
+dvConfiguration={{ dvConfiguration }}
 
 #-----------------------------------------------------------------------------
 # Name          : dvUserName
@@ -348,7 +348,7 @@ dvConfiguration=
 # Default value : None
 # Mandatory     : Yes, if DataVault option is chosen
 #-----------------------------------------------------------------------------
-dvUserName=
+dvUserName={{ dvUserName }}
 
 #-----------------------------------------------------------------------------
 # Name          : dvUserPassword
@@ -358,7 +358,7 @@ dvUserName=
 # Default value : None
 # Mandatory     : Yes, if DataVault option is chosen
 #-----------------------------------------------------------------------------
-dvUserPassword=
+dvUserPassword={{ dvUserPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : dvAccountManagerName
@@ -378,7 +378,7 @@ dvAccountManagerName=
 # Default value : None
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-dvAccountManagerPassword=
+dvAccountManagerPassword={{ dvAccountManagerPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : olsConfiguration
@@ -388,7 +388,7 @@ dvAccountManagerPassword=
 # Default value : False
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-olsConfiguration=
+olsConfiguration={{ olsConfiguration }}
 
 #-----------------------------------------------------------------------------
 # Name          : datafileJarLocation 
@@ -398,7 +398,7 @@ olsConfiguration=
 # Default value : None
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-datafileJarLocation=
+datafileJarLocation={{ datafileJarLocation }}
 
 #-----------------------------------------------------------------------------
 # Name          : datafileDestination 
@@ -408,7 +408,7 @@ datafileJarLocation=
 # Default value : $ORACLE_BASE/oradata
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-datafileDestination=
+datafileDestination={{ datafileDestination }}
 
 #-----------------------------------------------------------------------------
 # Name          : recoveryAreaDestination
@@ -418,7 +418,7 @@ datafileDestination=
 # Default value : $ORACLE_BASE/flash_recovery_area
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-recoveryAreaDestination=
+recoveryAreaDestination={{ recoveryAreaDestination }}
 
 #-----------------------------------------------------------------------------
 # Name          : storageType
@@ -428,7 +428,7 @@ recoveryAreaDestination=
 # Default value : FS
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-storageType=
+storageType={{ storageType }}
 
 #-----------------------------------------------------------------------------
 # Name          : diskGroupName
@@ -437,7 +437,7 @@ storageType=
 # Default value : DATA
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-diskGroupName=
+diskGroupName={{ diskGroupName }}
 
 #-----------------------------------------------------------------------------
 # Name          : asmsnmpPassword
@@ -446,7 +446,7 @@ diskGroupName=
 # Default value : None
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-asmsnmpPassword=
+asmsnmpPassword={{ asmsnmpPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : recoveryGroupName
@@ -455,7 +455,7 @@ asmsnmpPassword=
 # Default value : RECOVERY
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-recoveryGroupName=
+recoveryGroupName={{ recoveryGroupName }}
 
 #-----------------------------------------------------------------------------
 # Name          : characterSet
@@ -465,7 +465,7 @@ recoveryGroupName=
 # Default value : "US7ASCII"
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-characterSet=AL32UTF8
+characterSet={{ characterSet }}
 
 #-----------------------------------------------------------------------------
 # Name          : nationalCharacterSet
@@ -475,7 +475,7 @@ characterSet=AL32UTF8
 # Default value : "AL16UTF16"
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-nationalCharacterSet=UTF8
+nationalCharacterSet={{ nationalCharacterSet }}
 
 #-----------------------------------------------------------------------------
 # Name          : registerWithDirService
@@ -485,7 +485,7 @@ nationalCharacterSet=UTF8
 # Default value : FALSE
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-registerWithDirService=
+registerWithDirService={{ registerWithDirService }}
 
 
 #-----------------------------------------------------------------------------
@@ -494,7 +494,7 @@ registerWithDirService=
 # Description   : Specifies the name of the directory service user
 # Mandatory     : YES, if the value of registerWithDirService is TRUE
 #-----------------------------------------------------------------------------
-dirServiceUserName=
+dirServiceUserName={{ dirServiceUserName }}
 
 #-----------------------------------------------------------------------------
 # Name          : dirServicePassword
@@ -503,7 +503,7 @@ dirServiceUserName=
 #		  You can also specify the password at the command prompt instead of here.
 # Mandatory     : YES, if the value of registerWithDirService is TRUE
 #-----------------------------------------------------------------------------
-dirServicePassword=
+dirServicePassword={{ dirServiceUserName }}
 
 #-----------------------------------------------------------------------------
 # Name          : walletPassword
@@ -512,7 +512,7 @@ dirServicePassword=
 #		  You can also specify the password at the command prompt instead of here.
 # Mandatory     : YES, if the value of registerWithDirService is TRUE
 #-----------------------------------------------------------------------------
-walletPassword=
+walletPassword={{ walletPassword }}
 
 #-----------------------------------------------------------------------------
 # Name          : listeners
@@ -523,7 +523,7 @@ walletPassword=
 # Valid values  : The list should be comma separated like "listener1,listener2".
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-listeners=
+listeners={{ listeners }}
 
 #-----------------------------------------------------------------------------
 # Name          : variablesFile 
@@ -534,7 +534,7 @@ listeners=
 # Default value : None
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-variablesFile=
+variablesFile={{ variablesFile }}
 
 #-----------------------------------------------------------------------------
 # Name          : variables
@@ -552,7 +552,7 @@ variables=
 # Default value : None
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-initParams=
+initParams={{ initParams }} 
 
 #-----------------------------------------------------------------------------
 # Name          : sampleSchema
@@ -562,7 +562,7 @@ initParams=
 # Default value : FASLE
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-sampleSchema=TRUE
+sampleSchema={{ sampleSchema }}
 
 #-----------------------------------------------------------------------------
 # Name          : memoryPercentage
@@ -571,7 +571,7 @@ sampleSchema=TRUE
 # Default value : None
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-memoryPercentage=
+memoryPercentage={{ memoryPercentage }}
 
 #-----------------------------------------------------------------------------
 # Name          : databaseType
@@ -581,7 +581,7 @@ memoryPercentage=
 # Default value : MULTIPURPOSE
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-databaseType=
+databaseType={{ databaseType }}
 
 #-----------------------------------------------------------------------------
 # Name          : automaticMemoryManagement
@@ -591,7 +591,7 @@ databaseType=
 # Default value : TRUE
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-automaticMemoryManagement=
+automaticMemoryManagement={{ automaticMemoryManagement }}
 
 #-----------------------------------------------------------------------------
 # Name          : totalMemory
@@ -601,4 +601,4 @@ automaticMemoryManagement=
 # Default value : 
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-totalMemory=3072
+totalMemory={{ totalMemory }}

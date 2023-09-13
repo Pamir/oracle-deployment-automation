@@ -39,4 +39,6 @@ oracle_racdba_group: racdba
 
 oracle_groups: wheel,dba,backupdba,oper,dgdba,kmdba,racdba
 
+oracle_patch_number: 35319490
+
 
