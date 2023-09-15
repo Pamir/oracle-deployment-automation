@@ -53,6 +53,30 @@ resource "azurerm_monitor_diagnostic_setting" "pip" {
   }
 }
 
+resource "azurerm_monitor_diagnostic_setting" "vnet" {
+  count              = var.is_diagnostic_settings_enabled ? 1 : 0
+  name               = "vnet"
+  target_resource_id = azurerm_virtual_network.vnet_oracle[count.index].id
+  storage_account_id = var.storage_account_id
+
+  dynamic "enabled_log" {
+    for_each = toset(data.azurerm_monitor_diagnostic_categories.vnet[count.index].log_category_types)
+    content {
+      category = enabled_log.value
+      retention_policy {
+        enabled = false
+      }
+    }
+  }
+
+  metric {
+    category = "AllMetrics"
+    retention_policy {
+      enabled = false
+    }
+  }
+}
+
 data "azurerm_monitor_diagnostic_categories" "nic" {
   count       = var.is_diagnostic_settings_enabled ? 1 : 0
   resource_id = data.azurerm_network_interface.nic[count.index].id
@@ -66,6 +90,11 @@ data "azurerm_monitor_diagnostic_categories" "nsg" {
 data "azurerm_monitor_diagnostic_categories" "pip" {
   count       = var.is_diagnostic_settings_enabled ? 1 : 0
   resource_id = data.azurerm_public_ip.pip[count.index].id
+}
+
+data "azurerm_monitor_diagnostic_categories" "vnet" {
+  count       = var.is_diagnostic_settings_enabled ? 1 : 0
+  resource_id = data.azurerm_virtual_network.vnet[count.index].id
 }
 
 data "azurerm_network_interface" "nic" {
@@ -83,5 +112,11 @@ data "azurerm_network_security_group" "nsg" {
 data "azurerm_public_ip" "pip" {
   count               = 1
   name                = "vmpip"
+  resource_group_name = var.resource_group.name
+}
+
+data "azurerm_virtual_network" "vnet" {
+  count               = 1
+  name                = local.vnet_oracle_name
   resource_group_name = var.resource_group.name
 }
