@@ -67,16 +67,42 @@ variable "skip_service_principal_aad_check" {
 variable "storage_account_id" {
   description = "Storage account ID used for diagnostics"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "storage_account_sas_token" {
   description = "Storage account SAS token used for diagnostics"
   type        = string
-  default     = ""
+  default     = null
+}
+
+variable "log_analytics_workspace_id" {
+  description = "Log Analytics workspace ID"
+  type        = string
+  default     = null
+}
+
+variable "eventhub_authorization_rule_id" {
+  description = "ID of an Event Hub authorization rule"
+  type        = string
+  default     = null
+}
+
+variable "partner_solution_id" {
+  description = "Value of the partner solution ID"
+  default     = null
 }
 
 variable "is_diagnostic_settings_enabled" {
   description = "Whether diagnostic settings are enabled"
   default     = false
+}
+
+variable "diagnostic_target" {
+  description = "The destination type of the diagnostic settings"
+  default     = "Log_Analytics_Workspace"
+  validation {
+    condition     = contains(["Log_Analytics_Workspace", "Storage_Account", "Event_Hubs", "Partner_Solutions"], var.diagnostic_target)
+    error_message = "Allowed values are Log_Analytics_Workspace, Storage_Account, Event_Hubs, Partner_Solutions"
+  }
 }

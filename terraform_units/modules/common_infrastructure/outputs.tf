@@ -45,3 +45,23 @@ output "target_storage_account_sas" {
   description = "Storage account SAS used for diagnostics"
   value       = var.is_diagnostic_settings_enabled ? data.azurerm_storage_account_sas.diagnostic[0].sas : ""
 }
+
+output "log_analytics_workspace_id" {
+  description = "Log Analytics workspace ID"
+  value       = var.is_diagnostic_settings_enabled && var.diagnostic_target == "Log_Analytics_Workspace" ? data.azurerm_log_analytics_workspace.diagnostic[0].id : null
+}
+
+output "eventhub_authorization_rule_id" {
+  description = "ID of an Event Hub authorization rule"
+  value       = var.is_diagnostic_settings_enabled && var.diagnostic_target == "Event_Hubs" ? azurerm_eventhub_namespace_authorization_rule.diagnostic[0].id : null
+}
+
+output "partner_solution_id" {
+  description = "Partner solution ID"
+  value       = var.is_diagnostic_settings_enabled && var.diagnostic_target == "Partner_Solutions" ? azurerm_new_relic_monitor.diagnostic[0].id : null
+}
+
+output "diagnostic_target" {
+  description = "The destination type of the diagnostic settings"
+  value       = var.diagnostic_target
+}

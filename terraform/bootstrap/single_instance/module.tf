@@ -3,6 +3,7 @@ module "common_infrastructure" {
 
   infrastructure                 = local.infrastructure
   is_diagnostic_settings_enabled = true
+  diagnostic_target              = "Partner_Solutions"
 }
 
 module "vm" {
@@ -19,8 +20,12 @@ module "vm" {
   assign_subscription_permissions = true
 
   is_diagnostic_settings_enabled = module.common_infrastructure.is_diagnostic_settings_enabled
+  diagnostic_target              = module.common_infrastructure.diagnostic_target
   storage_account_id             = module.common_infrastructure.target_storage_account_id
   storage_account_sas_token      = module.common_infrastructure.target_storage_account_sas
+  log_analytics_workspace_id     = module.common_infrastructure.log_analytics_workspace_id
+  eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
+  partner_solution_id            = module.common_infrastructure.partner_solution_id
 }
 
 module "network" {
@@ -28,7 +33,11 @@ module "network" {
 
   resource_group                 = module.common_infrastructure.resource_group
   is_diagnostic_settings_enabled = module.common_infrastructure.is_diagnostic_settings_enabled
+  diagnostic_target              = module.common_infrastructure.diagnostic_target
   storage_account_id             = module.common_infrastructure.target_storage_account_id
+  log_analytics_workspace_id     = module.common_infrastructure.log_analytics_workspace_id
+  eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
+  partner_solution_id            = module.common_infrastructure.partner_solution_id
 }
 
 module "storage" {

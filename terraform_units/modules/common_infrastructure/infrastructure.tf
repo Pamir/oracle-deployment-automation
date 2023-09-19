@@ -91,3 +91,56 @@ data "azurerm_storage_account_sas" "diagnostic" {
     filter  = false
   }
 }
+
+resource "azurerm_log_analytics_workspace" "diagnostic" {
+  count               = var.is_diagnostic_settings_enabled && var.diagnostic_target == "Log_Analytics_Workspace" ? 1 : 0
+  name                = "${local.prefix}diag${random_string.suffix.result}"
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
+data "azurerm_log_analytics_workspace" "diagnostic" {
+  count               = var.is_diagnostic_settings_enabled && var.diagnostic_target == "Log_Analytics_Workspace" ? 1 : 0
+  name                = "${local.prefix}diag${random_string.suffix.result}"
+  resource_group_name = data.azurerm_resource_group.rg.name
+
+  depends_on = [azurerm_log_analytics_workspace.diagnostic]
+}
+
+resource "azurerm_eventhub_namespace" "diagnostic" {
+  count               = var.is_diagnostic_settings_enabled && var.diagnostic_target == "Event_Hubs" ? 1 : 0
+  name                = "${local.prefix}diag${random_string.suffix.result}"
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+  sku                 = "Standard"
+  capacity            = 1
+}
+
+resource "azurerm_eventhub_namespace_authorization_rule" "diagnostic" {
+  count               = var.is_diagnostic_settings_enabled && var.diagnostic_target == "Event_Hubs" ? 1 : 0
+  name                = "${local.prefix}diag${random_string.suffix.result}"
+  namespace_name      = azurerm_eventhub_namespace.diagnostic[0].name
+  resource_group_name = data.azurerm_resource_group.rg.name
+  listen              = var.eventhub_permission.listen
+  send                = var.eventhub_permission.send
+  manage              = var.eventhub_permission.manage
+}
+
+resource "azurerm_new_relic_monitor" "diagnostic" {
+  count               = var.is_diagnostic_settings_enabled && var.diagnostic_target == "Partner_Solutions" ? 1 : 0
+  name                = "${local.prefix}diag${random_string.suffix.result}"
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+  plan {
+    effective_date = "2023-09-20T00:00:00Z"
+  }
+
+  user {
+    email        = var.logz_user.email
+    first_name   = var.logz_user.first_name
+    last_name    = var.logz_user.last_name
+    phone_number = var.logz_user.phone_number
+  }
+}
