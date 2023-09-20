@@ -3,7 +3,7 @@ module "common_infrastructure" {
 
   infrastructure                 = local.infrastructure
   is_diagnostic_settings_enabled = true
-  diagnostic_target              = "Partner_Solutions"
+  diagnostic_target              = "Log_Analytics_Workspace"
 }
 
 module "vm" {
