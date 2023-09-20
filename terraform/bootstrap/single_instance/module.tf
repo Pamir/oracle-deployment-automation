@@ -4,6 +4,13 @@ module "common_infrastructure" {
   infrastructure                 = local.infrastructure
   is_diagnostic_settings_enabled = true
   diagnostic_target              = "Log_Analytics_Workspace"
+
+  role_assignments = {
+    role_assignment_1 = {
+      name                             = "Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
 }
 
 module "vm" {
@@ -26,6 +33,13 @@ module "vm" {
   log_analytics_workspace_id     = module.common_infrastructure.log_analytics_workspace_id
   eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
   partner_solution_id            = module.common_infrastructure.partner_solution_id
+
+  role_assignments = {
+    role_assignment_1 = {
+      name                             = "Virtual Machine Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
 }
 
 module "network" {
@@ -38,6 +52,41 @@ module "network" {
   log_analytics_workspace_id     = module.common_infrastructure.log_analytics_workspace_id
   eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
   partner_solution_id            = module.common_infrastructure.partner_solution_id
+
+  role_assignments_nic = {
+    role_assignment_1 = {
+      name                             = "Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
+
+  role_assignments_pip = {
+    role_assignment_1 = {
+      name                             = "Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
+
+  role_assignments_nsg = {
+    role_assignment_1 = {
+      name                             = "Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
+
+  role_assignments_vnet = {
+    role_assignment_1 = {
+      name                             = "Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
+
+  role_assignments_subnet = {
+    role_assignment_1 = {
+      name                             = "Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
 }
 
 module "storage" {
@@ -46,4 +95,11 @@ module "storage" {
   resource_group = module.common_infrastructure.resource_group
   naming         = "oracle"
   vm             = module.vm.vm[0]
+
+  role_assignments = {
+    role_assignment_1 = {
+      name                             = "Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
 }

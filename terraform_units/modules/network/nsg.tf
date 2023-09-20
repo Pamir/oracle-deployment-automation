@@ -15,3 +15,8 @@ resource "azurerm_subnet_network_security_group_association" "ssh" {
   subnet_id                 = azurerm_subnet.subnet_oracle[0].id
   network_security_group_id = azurerm_network_security_group.blank.id
 }
+
+data "azurerm_network_security_group" "blank" {
+  name                = "blank"
+  resource_group_name = var.resource_group.name
+}

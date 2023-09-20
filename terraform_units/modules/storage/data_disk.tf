@@ -18,3 +18,9 @@ resource "azurerm_virtual_machine_data_disk_attachment" "data_disk_attachment" {
   write_accelerator_enabled = local.data_disks[count.index].write_accelerator_enabled
   lun                       = local.data_disks[count.index].lun
 }
+
+data "azurerm_managed_disk" "data_disk" {
+  count               = length(local.data_disks)
+  name                = azurerm_managed_disk.data_disk[count.index].name
+  resource_group_name = var.resource_group.name
+}

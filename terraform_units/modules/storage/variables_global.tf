@@ -45,3 +45,8 @@ variable "database" {
     ]
   }
 }
+
+variable "role_assignments" {
+  description = "Role assignments"
+  default     = {}
+}

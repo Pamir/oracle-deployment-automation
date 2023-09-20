@@ -40,6 +40,12 @@ resource "azurerm_network_interface" "oracle_db" {
   tags = local.tags
 }
 
+data "azurerm_network_interface" "oracle_db" {
+  count               = 1
+  name                = "oraclevmnic1"
+  resource_group_name = var.resource_group.name
+}
+
 resource "azurerm_public_ip" "vm_pip" {
   name                = "vmpip"
   location            = var.resource_group.location
@@ -47,4 +53,9 @@ resource "azurerm_public_ip" "vm_pip" {
   allocation_method   = "Dynamic"
 
   tags = local.tags
+}
+
+data "azurerm_public_ip" "vm_pip" {
+  name                = "vmpip"
+  resource_group_name = var.resource_group.name
 }

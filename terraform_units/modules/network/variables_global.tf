@@ -69,3 +69,28 @@ variable "is_diagnostic_settings_enabled" {
   description = "Whether diagnostic settings are enabled"
   default     = false
 }
+
+variable "role_assignments_nic" {
+  description = "Role assignments scoped to the network interface"
+  default     = {}
+}
+
+variable "role_assignments_pip" {
+  description = "Role assignments scoped to the public IP address"
+  default     = {}
+}
+
+variable "role_assignments_nsg" {
+  description = "Role assignments scoped to the network security group"
+  default     = {}
+}
+
+variable "role_assignments_vnet" {
+  description = "Role assignments scoped to the virtual network"
+  default     = {}
+}
+
+variable "role_assignments_subnet" {
+  description = "Role assignments scoped to the subnet"
+  default     = {}
+}

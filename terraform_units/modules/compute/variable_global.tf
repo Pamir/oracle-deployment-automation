@@ -106,3 +106,8 @@ variable "diagnostic_target" {
     error_message = "Allowed values are Log_Analytics_Workspace, Storage_Account, Event_Hubs, Partner_Solutions"
   }
 }
+
+variable "role_assignments" {
+  description = "Role assignments"
+  default     = {}
+}

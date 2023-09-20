@@ -31,14 +31,6 @@ data "azurerm_monitor_diagnostic_categories" "oracle_vm" {
   resource_id = data.azurerm_virtual_machine.oracle_vm[count.index].id
 }
 
-data "azurerm_virtual_machine" "oracle_vm" {
-  count               = var.database_server_count
-  name                = "${var.vm_name}-${count.index}"
-  resource_group_name = var.resource_group.name
-
-  depends_on = [azurerm_linux_virtual_machine.oracle_vm]
-}
-
 resource "azurerm_virtual_machine_extension" "diag_setting" {
   count                      = var.is_diagnostic_settings_enabled ? var.database_server_count : 0
   name                       = "${var.vm_name}-${count.index}-diag"

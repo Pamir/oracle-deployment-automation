@@ -32,3 +32,8 @@ variable "logz_user" {
     phone_number = "+12313803556"
   }
 }
+
+variable "role_assignments" {
+  description = "Role assignments"
+  default     = {}
+}

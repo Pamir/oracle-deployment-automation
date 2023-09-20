@@ -80,3 +80,41 @@ module "common_infrastructure" {
   is_diagnostic_settings_enabled = true  // ← This one
 }
 ```
+
+### How to assign roles in a specific scope
+
+To assign roles, you must set `role_assignments` value in each module.
+
+For example, in order to assign `Contributor` role in a subscription scope, you have to set the value like below.
+
+```
+module "common_infrastructure" {
+  source = "../../../terraform_units/modules/common_infrastructure"
+
+  ・・・
+
+  role_assignments = {
+    role_assignment_1 = {
+      name                             = "Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
+}
+```
+
+Also, you can assign roles in the specific scope. If you want to assign `Virtual Machine Contributor` role in the VM scope, you should set the below value.
+
+```
+module "vm" {
+  source = "../../../terraform_units/modules/compute"
+  ・・・
+  role_assignments = {
+    role_assignment_1 = {
+      name                             = "Virtual Machine Contributor"
+      skip_service_principal_aad_check = false
+    }
+  }
+}
+```
+
+Role names you can assign can be referred in [this document](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles).
