@@ -8,7 +8,7 @@ resource "azurerm_network_security_group" "blank" {
   location            = var.resource_group.location
   resource_group_name = var.resource_group.name
 
-  tags = local.tags
+  tags = merge(local.tags, var.tags)
 }
 
 resource "azurerm_subnet_network_security_group_association" "ssh" {

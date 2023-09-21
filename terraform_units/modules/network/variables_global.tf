@@ -94,3 +94,8 @@ variable "role_assignments_subnet" {
   description = "Role assignments scoped to the subnet"
   default     = {}
 }
+
+variable "tags" {
+  description = "Tags to be added to the resources"
+  default     = {}
+}

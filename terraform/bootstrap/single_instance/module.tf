@@ -4,6 +4,7 @@ module "common_infrastructure" {
   infrastructure                 = local.infrastructure
   is_diagnostic_settings_enabled = true
   diagnostic_target              = "Log_Analytics_Workspace"
+  tags                           = var.resourcegroup_tags
 
   role_assignments = {
     role_assignment_1 = {
@@ -33,6 +34,7 @@ module "vm" {
   log_analytics_workspace_id     = module.common_infrastructure.log_analytics_workspace_id
   eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
   partner_solution_id            = module.common_infrastructure.partner_solution_id
+  tags                     = module.common_infrastructure.tags
 
   role_assignments = {
     role_assignment_1 = {
@@ -52,6 +54,7 @@ module "network" {
   log_analytics_workspace_id     = module.common_infrastructure.log_analytics_workspace_id
   eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
   partner_solution_id            = module.common_infrastructure.partner_solution_id
+  tags                     = module.common_infrastructure.tags
 
   role_assignments_nic = {
     role_assignment_1 = {
@@ -95,6 +98,7 @@ module "storage" {
   resource_group = module.common_infrastructure.resource_group
   naming         = "oracle"
   vm             = module.vm.vm[0]
+  tags                     = module.common_infrastructure.tags
 
   role_assignments = {
     role_assignment_1 = {

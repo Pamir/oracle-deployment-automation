@@ -17,4 +17,6 @@ locals {
 
   // Resource group
   prefix = "oracle"
+
+  tags = {}
 }

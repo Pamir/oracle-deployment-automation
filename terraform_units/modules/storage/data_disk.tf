@@ -7,7 +7,7 @@ resource "azurerm_managed_disk" "data_disk" {
   create_option        = "Empty"
   disk_size_gb         = 1024
 
-  tags = local.tags
+ tags = merge(local.tags, var.tags)
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "data_disk_attachment" {

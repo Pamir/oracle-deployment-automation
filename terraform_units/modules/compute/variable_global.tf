@@ -111,3 +111,8 @@ variable "role_assignments" {
   description = "Role assignments"
   default     = {}
 }
+
+variable "tags" {
+  description = "Tags to be added to the resources"
+  default     = {}
+}

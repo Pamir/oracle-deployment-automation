@@ -22,6 +22,11 @@ output "created_resource_group_subscription_id" {
   value       = module.common_infrastructure.resource_group.id
 }
 
+output "created_resource_group_tags" {
+  description = "Created resource group tags"
+  value       = module.common_infrastructure.tags
+}
+
 ###############################################################################
 #                                                                             #
 #                            Network                                          #

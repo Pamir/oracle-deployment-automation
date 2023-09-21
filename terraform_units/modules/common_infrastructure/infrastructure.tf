@@ -14,7 +14,7 @@ resource "azurerm_resource_group" "rg" {
   count    = local.resource_group_exists ? 0 : 1
   name     = local.rg_name
   location = var.infrastructure.region
-  tags     = var.infrastructure.tags
+  tags     = var.tags
 
   lifecycle {
     ignore_changes = [
@@ -39,6 +39,7 @@ resource "azurerm_storage_account" "diagnostic" {
   name                = "${local.prefix}diag${random_string.suffix.result}"
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
+  tags = merge(local.tags, var.tags)
 
   account_tier             = "Standard"
   account_replication_type = "LRS"
@@ -99,6 +100,7 @@ resource "azurerm_log_analytics_workspace" "diagnostic" {
   location            = data.azurerm_resource_group.rg.location
   sku                 = "PerGB2018"
   retention_in_days   = 30
+  tags = merge(local.tags, var.tags)
 }
 
 data "azurerm_log_analytics_workspace" "diagnostic" {
@@ -116,6 +118,7 @@ resource "azurerm_eventhub_namespace" "diagnostic" {
   location            = data.azurerm_resource_group.rg.location
   sku                 = "Standard"
   capacity            = 1
+  tags = merge(local.tags, var.tags)
 }
 
 resource "azurerm_eventhub_namespace_authorization_rule" "diagnostic" {

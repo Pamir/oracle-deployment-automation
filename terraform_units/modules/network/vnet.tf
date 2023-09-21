@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "vnet_oracle" {
   location            = var.resource_group.location
   address_space       = [local.vnet_oracle_addr]
 
-  tags = local.tags
+  tags = merge(local.tags, var.tags)
 }
 
 data "azurerm_virtual_network" "vnet_oracle" {
