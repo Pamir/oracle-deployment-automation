@@ -22,15 +22,20 @@ output "created_resource_group_subscription_id" {
   value       = module.common_infrastructure.resource_group.id
 }
 
+output "created_resource_group_tags" {
+  description = "Created resource group tags"
+  value       = module.common_infrastructure.tags
+}
+
 ###############################################################################
 #                                                                             #
 #                            Network                                          #
 #                                                                             #
 ###############################################################################
 output "network_location" {
-  value = module.common_infrastructure.network_location
+  value = module.network.network_location
 }
 
 output "db_subnet" {
-  value = module.common_infrastructure.db_subnet
+  value = module.network.db_subnet
 }

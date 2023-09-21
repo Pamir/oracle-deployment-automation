@@ -17,8 +17,7 @@ variable "database" {
         create_option             = "Empty"
         disk_size_gb              = 1024
         lun                       = 0
-        managed_disk_type         = "Premium_LRS"
-        storage_account_type      = "Standard_LRS"
+        disk_type                 = "Premium_LRS"
         write_accelerator_enabled = false
       },
       {
@@ -27,8 +26,7 @@ variable "database" {
         create_option             = "Empty"
         disk_size_gb              = 1024
         lun                       = 1
-        managed_disk_type         = "Premium_LRS"
-        storage_account_type      = "Standard_LRS"
+        disk_type                 = "Premium_LRS"
         write_accelerator_enabled = false
       }
     ]
