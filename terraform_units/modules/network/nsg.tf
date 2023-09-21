@@ -19,4 +19,6 @@ resource "azurerm_subnet_network_security_group_association" "ssh" {
 data "azurerm_network_security_group" "blank" {
   name                = "blank"
   resource_group_name = var.resource_group.name
+
+  depends_on = [azurerm_network_security_group.blank]
 }

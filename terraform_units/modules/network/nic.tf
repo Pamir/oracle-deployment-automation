@@ -44,6 +44,8 @@ data "azurerm_network_interface" "oracle_db" {
   count               = 1
   name                = "oraclevmnic1"
   resource_group_name = var.resource_group.name
+
+  depends_on = [azurerm_network_interface.oracle_db]
 }
 
 resource "azurerm_public_ip" "vm_pip" {
@@ -58,4 +60,6 @@ resource "azurerm_public_ip" "vm_pip" {
 data "azurerm_public_ip" "vm_pip" {
   name                = "vmpip"
   resource_group_name = var.resource_group.name
+
+  depends_on = [azurerm_public_ip.vm_pip]
 }

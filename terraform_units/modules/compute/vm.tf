@@ -60,6 +60,8 @@ data "azurerm_virtual_machine" "oracle_vm" {
   count               = var.database_server_count
   name                = "${var.vm_name}-${count.index}"
   resource_group_name = var.resource_group.name
+
+  depends_on = [azurerm_linux_virtual_machine.oracle_vm]
 }
 
 #########################################################################################
