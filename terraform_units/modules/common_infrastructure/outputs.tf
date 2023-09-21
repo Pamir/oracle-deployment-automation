@@ -65,3 +65,8 @@ output "diagnostic_target" {
   description = "The destination type of the diagnostic settings"
   value       = var.diagnostic_target
 }
+
+output "tags" {
+  description = "Tags applied to the resources"
+  value       = var.tags
+}

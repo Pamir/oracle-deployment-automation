@@ -62,3 +62,7 @@ variable "data_disk_locks" {
     error_message = "Lock type must be one of: CanNotDelete, ReadOnly."
   }
 }
+variable "tags" {
+  description = "Tags to be added to the resources"
+  default     = {}
+}

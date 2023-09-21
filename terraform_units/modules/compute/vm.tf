@@ -45,7 +45,7 @@ resource "azurerm_linux_virtual_machine" "oracle_vm" {
     identity_ids = [azurerm_user_assigned_identity.deployer.id]
   }
 
-  tags = local.tags
+  tags = merge(local.tags, var.tags)
 
   lifecycle {
     ignore_changes = [
