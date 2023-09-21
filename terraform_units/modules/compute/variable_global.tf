@@ -111,3 +111,15 @@ variable "role_assignments" {
   description = "Role assignments"
   default     = {}
 }
+
+variable "vm_locks" {
+  type = object({
+    name = optional(string, "")
+    type = optional(string, "CanNotDelete")
+  })
+  default = {}
+  validation {
+    condition     = contains(["CanNotDelete", "ReadOnly"], var.vm_locks.type)
+    error_message = "Lock type must be one of: CanNotDelete, ReadOnly."
+  }
+}

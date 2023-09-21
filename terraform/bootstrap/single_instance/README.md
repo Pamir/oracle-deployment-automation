@@ -118,3 +118,40 @@ module "vm" {
 ```
 
 Role names you can assign can be referred in [this document](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles).
+
+### How to prevent from deleting resources accidentally
+
+In order to prevent from deleting resources accidentally, you can lock resources in the specific scope.
+If you want to enable resource locks, you can add resource lock variables in the specific module.
+
+For example, you can enable resource lock at subscription level like this in `terraform/bootstrap/single_instance_module.tf` file.
+
+```
+module "common_infrastructure" {
+  source = "../../../terraform_units/modules/common_infrastructure"
+
+  ・・・
+
+  subscription_locks = {
+    name = "subscription_lock"
+    type = "CanNotDelete"
+  }
+}
+```
+
+In addition to that, you can lock the specific resource. For example, if you consider enabling lock a virtual network, you can set the variable in `terraform/bootstrap/single_instance_module.tf` file.
+
+```
+module "network" {
+  source = "../../../terraform_units/modules/network"
+
+  ・・・
+
+  vnet_locks = {
+    name = "vnet_lock"
+    type = "CanNotDelete"
+  }
+}
+```
+
+When you intend authorized users can only read from a resource, but they can't modify or delete it, you can set lock type `ReadOnly`.

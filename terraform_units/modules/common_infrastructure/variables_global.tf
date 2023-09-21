@@ -37,3 +37,27 @@ variable "role_assignments" {
   description = "Role assignments"
   default     = {}
 }
+
+variable "subscription_locks" {
+  type = object({
+    name = optional(string, "")
+    type = optional(string, "CanNotDelete")
+  })
+  default = {}
+  validation {
+    condition     = contains(["CanNotDelete", "ReadOnly"], var.subscription_locks.type)
+    error_message = "Lock type must be one of: CanNotDelete, ReadOnly."
+  }
+}
+
+variable "resource_group_locks" {
+  type = object({
+    name = optional(string, "")
+    type = optional(string, "CanNotDelete")
+  })
+  default = {}
+  validation {
+    condition     = contains(["CanNotDelete", "ReadOnly"], var.resource_group_locks.type)
+    error_message = "Lock type must be one of: CanNotDelete, ReadOnly."
+  }
+}

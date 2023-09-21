@@ -94,3 +94,51 @@ variable "role_assignments_subnet" {
   description = "Role assignments scoped to the subnet"
   default     = {}
 }
+
+variable "nic_locks" {
+  type = object({
+    name = optional(string, "")
+    type = optional(string, "CanNotDelete")
+  })
+  default = {}
+  validation {
+    condition     = contains(["CanNotDelete", "ReadOnly"], var.nic_locks.type)
+    error_message = "Lock type must be one of: CanNotDelete, ReadOnly."
+  }
+}
+
+variable "nsg_locks" {
+  type = object({
+    name = optional(string, "")
+    type = optional(string, "CanNotDelete")
+  })
+  default = {}
+  validation {
+    condition     = contains(["CanNotDelete", "ReadOnly"], var.nsg_locks.type)
+    error_message = "Lock type must be one of: CanNotDelete, ReadOnly."
+  }
+}
+
+variable "vnet_locks" {
+  type = object({
+    name = optional(string, "")
+    type = optional(string, "CanNotDelete")
+  })
+  default = {}
+  validation {
+    condition     = contains(["CanNotDelete", "ReadOnly"], var.vnet_locks.type)
+    error_message = "Lock type must be one of: CanNotDelete, ReadOnly."
+  }
+}
+
+variable "subnet_locks" {
+  type = object({
+    name = optional(string, "")
+    type = optional(string, "CanNotDelete")
+  })
+  default = {}
+  validation {
+    condition     = contains(["CanNotDelete", "ReadOnly"], var.subnet_locks.type)
+    error_message = "Lock type must be one of: CanNotDelete, ReadOnly."
+  }
+}
