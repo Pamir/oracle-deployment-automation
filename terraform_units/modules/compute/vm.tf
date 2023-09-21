@@ -40,7 +40,12 @@ resource "azurerm_linux_virtual_machine" "oracle_vm" {
     ultra_ssd_enabled = local.enable_ultradisk
   }
 
-  tags = local.tags
+  identity {
+    type         = var.aad_system_assigned_identity ? "SystemAssigned, UserAssigned" : "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.deployer.id]
+  }
+
+  tags = merge(local.tags, var.tags)
 
   lifecycle {
     ignore_changes = [
@@ -49,6 +54,14 @@ resource "azurerm_linux_virtual_machine" "oracle_vm" {
       computer_name
     ]
   }
+}
+
+data "azurerm_virtual_machine" "oracle_vm" {
+  count               = var.database_server_count
+  name                = "${var.vm_name}-${count.index}"
+  resource_group_name = var.resource_group.name
+
+  depends_on = [azurerm_linux_virtual_machine.oracle_vm]
 }
 
 #########################################################################################
