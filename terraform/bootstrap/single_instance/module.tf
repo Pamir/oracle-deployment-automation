@@ -34,7 +34,7 @@ module "vm" {
   log_analytics_workspace_id     = module.common_infrastructure.log_analytics_workspace_id
   eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
   partner_solution_id            = module.common_infrastructure.partner_solution_id
-  tags                     = module.common_infrastructure.tags
+  tags                           = module.common_infrastructure.tags
 
   role_assignments = {
     role_assignment_1 = {
@@ -54,7 +54,7 @@ module "network" {
   log_analytics_workspace_id     = module.common_infrastructure.log_analytics_workspace_id
   eventhub_authorization_rule_id = module.common_infrastructure.eventhub_authorization_rule_id
   partner_solution_id            = module.common_infrastructure.partner_solution_id
-  tags                     = module.common_infrastructure.tags
+  tags                           = module.common_infrastructure.tags
 
   role_assignments_nic = {
     role_assignment_1 = {
@@ -98,7 +98,7 @@ module "storage" {
   resource_group = module.common_infrastructure.resource_group
   naming         = "oracle"
   vm             = module.vm.vm[0]
-  tags                     = module.common_infrastructure.tags
+  tags           = module.common_infrastructure.tags
 
   role_assignments = {
     role_assignment_1 = {
@@ -106,4 +106,35 @@ module "storage" {
       skip_service_principal_aad_check = false
     }
   }
+}
+
+#########################################################################################
+#                                                                                       #
+#  JIT Access Policy                                                                    #
+#                                                                                       #
+#########################################################################################
+resource "azapi_resource" "jit_ssh_policy" {
+  count                     = module.vm.database_server_count
+  name                      = "JIT-SSH-Policy"
+  parent_id                 = "${module.common_infrastructure.resource_group.id}/providers/Microsoft.Security/locations/${module.common_infrastructure.resource_group.location}"
+  type                      = "Microsoft.Security/locations/jitNetworkAccessPolicies@2020-01-01"
+  schema_validation_enabled = false
+  body = jsonencode({
+    "kind" : "Basic"
+    "properties" : {
+      "virtualMachines" : [{
+        "id" : "/subscriptions/${module.common_infrastructure.current_subscription.subscription_id}/resourceGroups/${module.common_infrastructure.resource_group.name}/providers/Microsoft.Compute/virtualMachines/${module.vm.vm[0].name}",
+        "ports" : [
+          {
+            "number" : 22,
+            "protocol" : "TCP",
+            "allowedSourceAddressPrefix" : "*",
+            "maxRequestAccessDuration" : "PT3H"
+          }
+        ]
+      }]
+    }
+  })
+
+  depends_on = [module.vm]
 }
