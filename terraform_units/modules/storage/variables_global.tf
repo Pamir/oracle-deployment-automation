@@ -29,16 +29,29 @@ variable "database" {
         caching                   = "ReadOnly"
         create_option             = "Empty"
         disk_size_gb              = 1024
-        lun                       = 0
+        lun                       = 20
         disk_type                 = "Premium_LRS"
         write_accelerator_enabled = false
-      },
+      }
+    ],
+    asm_disks = [
+      {
+        count                     = 1
+        caching                   = "ReadOnly"
+        create_option             = "Empty"
+        disk_size_gb              = 1024
+        lun                       = 10
+        disk_type                 = "Premium_LRS"
+        write_accelerator_enabled = false
+      }
+    ]
+    redo_disks = [
       {
         count                     = 1
         caching                   = "None"
         create_option             = "Empty"
         disk_size_gb              = 1024
-        lun                       = 1
+        lun                       = 60
         disk_type                 = "Premium_LRS"
         write_accelerator_enabled = false
       }

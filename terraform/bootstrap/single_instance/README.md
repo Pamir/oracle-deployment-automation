@@ -155,3 +155,32 @@ module "network" {
 ```
 
 When you intend authorized users can only read from a resource, but they can't modify or delete it, you can set lock type `ReadOnly`.
+
+### Note
+
+#### Lun numbers of managed disks
+
+This is the default lun nubmer of managed disks.
+
+|           |     |
+| :-------- | :-- |
+| Data disk | 20  |
+| ASM disk  | 10  |
+| Redo disk | 60  |
+
+We set these as default values in ansible part.
+
+```
+  - name: Get ASM Disks
+    shell: "cd /dev/disk/azure/scsi1 ; lunpath=`ls /dev/disk/azure/scsi1 | grep -e lun[1][0-9]$` ; readlink -f ${lunpath}"
+    become_user: root
+    register: asm_disks
+  - name: Get Data Disks
+    shell: "cd /dev/disk/azure/scsi1 ; lunpath=`ls /dev/disk/azure/scsi1 | grep -e lun[2,3,4,5][0-9]$` ; readlink -f ${lunpath}"
+    become_user: root
+    register: data_disks
+  - name: Get Redo Disks
+    shell: "cd /dev/disk/azure/scsi1 ; lunpath=`ls /dev/disk/azure/scsi1 | grep -e lun[6][0-9]$` ; readlink -f ${lunpath}"
+    become_user: root
+    register: redo_disks
+```
