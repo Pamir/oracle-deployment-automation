@@ -237,6 +237,10 @@
     ignore_errors: yes
 
   #TODO: execute  orainsit from inventory as root
+  - name: Execute orainsit Script as to configure
+    shell: /u01/app/oraInventory/orainstRoot.sh
+    become_user: root
+    ignore_errors: yes
 
   - name: Execute Configuration Grid Script
     shell: /opt/grid/gridSetup.sh -executeConfigTools -responseFile /opt/grid/gridsetup.rsp -silent

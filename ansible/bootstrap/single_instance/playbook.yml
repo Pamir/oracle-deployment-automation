@@ -3,6 +3,7 @@
   gather_facts: true
   become: true
   roles:
-  - oracle19c  #oracle software installatio
+  #- common
   #- grid
-  #- dbca       # database creation
+  #- oracle19c  #oracle software installatio
+  - dbca       # database creation

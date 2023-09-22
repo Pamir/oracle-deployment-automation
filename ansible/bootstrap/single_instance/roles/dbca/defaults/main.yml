@@ -2,7 +2,7 @@
 oracle_db_home: /u01/app/oracle/product/19.3.0/dbhome_1
 oracle_user: oracle
 createAsContainerDatabase: "TRUE"
-gdbName: orcl19c
+gdbName: orcl
 sid:
 databaseConfigType:
 RACOneNodeServiceName:
@@ -40,9 +40,9 @@ datafileJarLocation:
 datafileDestination:
 recoveryAreaDestination:
 storageType:
-diskGroupName:
+diskGroupName: DATA
 asmsnmpPassword:
-recoveryGroupName:
+recoveryGroupName: ASM #RECO degistir
 characterSet: AL32UTF8
 nationalCharacterSet: UTF8
 registerWithDirService:
