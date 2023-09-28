@@ -3,7 +3,7 @@
 
 ## Overview
 
-This reposiitory describes how to create and install Oracle DB on an Azure VM in an automated fashion, through the use of "terraform" and "ansible".
+This repository describes how to create and install Oracle DB on an Azure VM in an automated fashion, through the use of "terraform" and "ansible".
 
 A single Azure VM will be deployed in a VNET in your Azure subscription.
 
