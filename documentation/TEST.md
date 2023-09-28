@@ -17,4 +17,7 @@ $ sqlplus / as sysadm
 SQL> show user
 ```
 
+<img src="publicip.jpg" />
+
+
 Congatulations. Now, you have a functional Oracle DB running on the Azure VM.
