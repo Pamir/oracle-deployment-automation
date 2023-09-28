@@ -7,12 +7,12 @@
 rg-oracle-demo-eastus-001
 ``````
 
-2. In the resource group you will find a VM called "vm-0"
+2. In the resource group you will find a VM called "vm-0":
 
 <img src="provisioned.jpg" />
 
 
-3. Check the networking for the Azure VM and ensure that the "ssh" port is allowed.
+3. Check the networking for the Azure VM and ensure that the "ssh" port is allowed:
 
 <img src="sshport.jpg" />
 
