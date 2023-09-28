@@ -15,7 +15,7 @@ $ sudo pip install python3-pip
 $ mkdir ~/projects
 ```
 
-4. Start clonng the repo.
+4. Start cloning the repo.
 ```
 $ git clone https://github.com/Pamir/oracle-deployment-automation.git
 ```
