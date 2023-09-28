@@ -1,11 +1,26 @@
 # Oracle Deployment Automation - Single VM Version
-Oracle Deployment Automation 3
+
 
 ## Overview
 
+This reposiitory describes how to create and install Oracle DB on an Azure VM in an automated fashion, through the use of "terraform" and "ansible".
+
+A single Azure VM will be deployed in a VNET in your Azure subscription.
+
 ## Pre-requisities
 
+1. An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/en-us/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) before you begin.
+2. A compute source running Ubuntu. This can either be a local computer or [an Azure VM](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal?tabs=ubuntu). 
+3. [Terraform installed](https://developer.hashicorp.com/terraform/downloads) on the compute source.
+4. [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) on the compute source.
+5. [Az CLI installed](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt) on the compute source.
+
 ## Next Steps
+
+1. Clone this repo onto the compute resource.
+2. [Provision infrastructure on Azure](https://github.com/Pamir/oracle-deployment-automation/blob/main/terraform/bootstrap/single_instance/README.md) via terraform.
+3. Install and configure Oracle DB via ansible
+4. Test the final configuration.
 
 
 ## Contributing
