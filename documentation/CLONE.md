@@ -20,14 +20,16 @@ $ mkdir ~/projects
 $ git clone https://github.com/Pamir/oracle-deployment-automation.git
 ```
 
-5. Switch to the approprate branch.
+5. Fetch as shown below.
+```
+$ git fetch --all
+```
+
+6. Switch to the approprate branch.
 ```
 $ git switch feature/create-single-vm
 ```
 
-6. Fetch as shown below.
-```
-$ git fetch --all
-```
+
 
 7. Now, you can do back to the main README.md document.
