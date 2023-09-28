@@ -20,7 +20,7 @@ A single Azure VM will be deployed in a VNET in your Azure subscription.
 1. [Clone this repo](https://github.com/Pamir/oracle-deployment-automation/blob/feature/create-single-vm/CLONE.md) onto the compute resource.
 2. [Provision infrastructure on Azure](https://github.com/Pamir/oracle-deployment-automation/blob/feature/create-single-vm/terraform/bootstrap/single_instance/README.md) via terraform.
 3. [Review the infrastructure](https://github.com/Pamir/oracle-deployment-automation/blob/feature/create-single-vm/REVIEW_INFRA.md) provisioned on Azure.
-4. [Install and configure Oracle DB](ANSIBLE.md) via ansible.
+4. [Install and configure Oracle DB](https://github.com/Pamir/oracle-deployment-automation/blob/feature/create-single-vm/ANSIBLE.md) via ansible.
 5. Test the final configuration.
 
 
