@@ -13,7 +13,7 @@ $ env | grep -i oracle
 
 3. Connect to the database:
 ```
-$ sqlplus / as sysadm
+$ sqlplus / as sysdba
 SQL> show user
 ```
 
