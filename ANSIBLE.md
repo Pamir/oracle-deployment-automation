@@ -1,6 +1,6 @@
 # Using ansible to configure OracleDB & ASM
 
-Follow the steps given below:
+On the compute source running Ubuntu, follow the steps given below:
 
 1. Switch to the branch subdirectory
 ```
