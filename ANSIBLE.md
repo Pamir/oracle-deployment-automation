@@ -32,11 +32,11 @@ $ ansible-playbook playbook.yml -i inventory
 
 6. It is acceptable to see warnings highlighted in red.
 
-<img src="warnings.jpg" />
+<img src="documentation\warnings.jpg" />
 
 Once the installation and configuration completes, you will see a screen similar to the one below. 
 
-<img src="complete.jpg" />
+<img src="documentation\complete.jpg" />
 
 
 
