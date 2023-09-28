@@ -12,7 +12,13 @@ rg-oracle-demo-eastus-001
 <img src="provisioned.jpg" />
 
 
-3. Copy the public IP address of the VM to use in the future steps. An example is given below.
+3. Check the networking for the Azure VM and ensure that the "ssh" port is allowed.
+
+<img src="sshport.jpg" />
+
+
+
+4. Copy the public IP address of the VM to use in the future steps. An example is given below.
 
 <img src="publicip.jpg" />
 
