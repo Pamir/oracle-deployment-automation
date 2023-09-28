@@ -40,7 +40,7 @@ Once the installation and configuration completes, you will see a screen similar
 
 
 
-7. Now you can go back to the README.md file.
+7. Now you can go back to the main README.md file.
 
 
 

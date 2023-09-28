@@ -30,4 +30,4 @@ $ git switch feature/create-single-vm
 $ git fetch --all
 ```
 
-Now, you can do back to the main README.md document.
+7. Now, you can do back to the main README.md document.
