@@ -19,13 +19,13 @@ useLocalUndoForPDBs:
 pdbAdminPassword:
 nodelist:
 templateName: General_Purpose.dbc
-sysPassword: oracle123
-systemPassword: oracle123
+sysPassword: #####
+systemPassword: #####
 oracleHomeUserPassword:
 emConfiguration: DBEXPRESS
 emExpressPort: 5500
 runCVUChecks:
-dbsnmpPassword: oracle123
+dbsnmpPassword: #####
 omsHost:
 omsPort:
 emUser:
